@@ -2,6 +2,7 @@ package com.example.guest.moviesapp.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.movieImageView) ImageView mMovieImageView;
+//        @Bind(R.id.movieImageView) ImageView mMovieImageView;
         @Bind(R.id.movieTitleTextView) TextView mMovieTitleTextView;
         @Bind(R.id.dateTextView) TextView mDateTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
@@ -60,10 +61,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         }
 
         public void bindMovie(Movie movie) {
+            Log.d("title", movie.getTitle());
             mMovieTitleTextView.setText(movie.getTitle());
             mDateTextView.setText(movie.getReleaseDate());
-            mRatingTextView.setText("Rating: " + movie.getRating() + "/10");
-            }
+            mRatingTextView.setText("Rating: " + Double.toString(movie.getRating()) + "/10");
         }
     }
 }

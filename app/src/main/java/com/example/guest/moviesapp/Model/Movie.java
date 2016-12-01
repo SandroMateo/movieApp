@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 public class Movie {
     private String mTitle;
-    private Double mRating;
+    private double mRating;
     private String mReleaseDate;
     private String mPosterUrl;
     private String mOverview;
     private String mDirector;
     private ArrayList<String> mMainActors = new ArrayList<>();
 
-    public Movie(String title, Double rating, String releaseDate, String posterUrl) {
+    public Movie(String title, double rating, String releaseDate, String posterUrl) {
         this.mTitle = title;
         this.mRating = rating;
         this.mReleaseDate = releaseDate;
@@ -25,7 +25,7 @@ public class Movie {
         return mTitle;
     }
 
-    public Double getRating() {
+    public double getRating() {
         return mRating;
     }
 
