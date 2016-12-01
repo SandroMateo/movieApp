@@ -61,5 +61,4 @@ public class Movie {
         this.mMainActors = mainActors;
     }
 
-
 }

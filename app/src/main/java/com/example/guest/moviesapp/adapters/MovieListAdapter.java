@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.guest.moviesapp.Constants;
 import com.example.guest.moviesapp.Model.Movie;
 import com.example.guest.moviesapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-//        @Bind(R.id.movieImageView) ImageView mMovieImageView;
+        @Bind(R.id.movieImageView) ImageView mMovieImageView;
         @Bind(R.id.movieTitleTextView) TextView mMovieTitleTextView;
         @Bind(R.id.dateTextView) TextView mDateTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
@@ -61,7 +63,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         }
 
         public void bindMovie(Movie movie) {
-            Log.d("title", movie.getTitle());
+            Picasso.with(mContext).load(Constants.POSTER_BASE_URL + movie.getPosterUrl()).into(mMovieImageView);
             mMovieTitleTextView.setText(movie.getTitle());
             mDateTextView.setText(movie.getReleaseDate());
             mRatingTextView.setText("Rating: " + Double.toString(movie.getRating()) + "/10");
