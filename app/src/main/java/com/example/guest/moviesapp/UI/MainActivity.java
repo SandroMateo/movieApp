@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guest.moviesapp.Model.Movie;
 import com.example.guest.moviesapp.R;
 import com.example.guest.moviesapp.Service.MovieService;
 import com.example.guest.moviesapp.adapters.MovieListAdapter;
+import com.example.guest.moviesapp.decorators.ItemClickSupport;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         getNowPlaying();
-    }
+    };
 
     private void getNowPlaying() {
         final MovieService movieService = new MovieService();

@@ -1,6 +1,7 @@
 package com.example.guest.moviesapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guest.moviesapp.Constants;
 import com.example.guest.moviesapp.Model.Movie;
 import com.example.guest.moviesapp.R;
+import com.example.guest.moviesapp.UI.MainActivity;
+import com.example.guest.moviesapp.UI.MovieDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,7 +52,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         return mMovies.size();
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
+    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @Bind(R.id.movieIdTextView) TextView mMovieIdView;
         @Bind(R.id.movieImageView) ImageView mMovieImageView;
         @Bind(R.id.movieTitleTextView) TextView mMovieTitleTextView;
         @Bind(R.id.dateTextView) TextView mDateTextView;
@@ -60,6 +65,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindMovie(Movie movie) {
@@ -68,5 +74,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             mDateTextView.setText(movie.getReleaseDate());
             mRatingTextView.setText("Rating: " + Double.toString(movie.getRating()) + "/10");
         }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, MovieDetailActivity.class);
+            String clickedMovieId = mMovies.get(getLayoutPosition()).getMovieId();
+            intent.putExtra("movieId", clickedMovieId);
+            Log.d("movieId", clickedMovieId);
+            mContext.startActivity(intent);
+        }
     }
+
 }

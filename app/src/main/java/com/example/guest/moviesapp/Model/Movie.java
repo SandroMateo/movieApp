@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Movie {
     private String mTitle;
+    private String mMovieId;
     private double mRating;
     private String mReleaseDate;
     private String mPosterUrl;
@@ -14,8 +15,9 @@ public class Movie {
     private String mDirector;
     private ArrayList<String> mMainActors = new ArrayList<>();
 
-    public Movie(String title, double rating, String releaseDate, String posterUrl) {
+    public Movie(String title, String movieId, double rating, String releaseDate, String posterUrl) {
         this.mTitle = title;
+        this.mMovieId = movieId;
         this.mRating = rating;
         this.mReleaseDate = releaseDate;
         this.mPosterUrl = posterUrl;
@@ -23,6 +25,10 @@ public class Movie {
 
     public String getTitle() {
         return mTitle;
+    }
+
+    public String getMovieId() {
+        return mMovieId;
     }
 
     public double getRating() {

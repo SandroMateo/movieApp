@@ -51,14 +51,14 @@ public class MovieService {
                 for (int i = 0; i < movieList.length(); i++){
                     JSONObject movie = movieList.getJSONObject(i);
                     String title = movie.getString("title");
+                    String movieId = Integer.toString(movie.getInt("id"));
                     double rating = movie.getDouble("vote_average");
                     String releaseDate = movie.getString("release_date");
                     String posterUrl = movie.getString("poster_path");
 
-                    Movie newMovie = new Movie(title, rating, releaseDate, posterUrl);
+                    Movie newMovie = new Movie(title, movieId, rating, releaseDate, posterUrl);
                     movies.add(newMovie);
                 }
-
 
             }
         } catch (IOException e) {
