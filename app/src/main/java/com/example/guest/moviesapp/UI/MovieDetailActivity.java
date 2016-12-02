@@ -38,6 +38,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void getMovieDetail(Movie movie) {
         final MovieService movieService = new MovieService();
+        final Movie thisMovie = movie;
         movieService.findMovieCredits(movie.getMovieId(), new Callback() {
 
             @Override
@@ -47,7 +48,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
-                movieService.processMovieCredits(movie, response);
+                movieService.processMovieCredits(thisMovie, response);
 
                 MovieDetailActivity.this.runOnUiThread(new Runnable() {
 
