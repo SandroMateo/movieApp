@@ -2,6 +2,7 @@ package com.example.guest.moviesapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,8 +81,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
+            Bundle args = new Bundle();
             Movie clickedMovie = mMovies.get(getLayoutPosition());
-            intent.putExtra("movie", Parcels.wrap(clickedMovie));
+            args.putParcelable("movie", Parcels.wrap(clickedMovie));
+            intent.putExtra("movie", args);
             mContext.startActivity(intent);
         }
     }

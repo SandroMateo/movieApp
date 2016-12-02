@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.guest.moviesapp.Model.Movie;
 import com.example.guest.moviesapp.R;
@@ -31,6 +32,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Movie mMovie = Parcels.unwrap(intent.getParcelableExtra("movie"));
+        Log.d("movie", "movie: " + mMovie);
 
 
         getMovieDetail(mMovie);
@@ -49,7 +51,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
                 movieService.processMovieCredits(thisMovie, response);
-
+                Log.d("director", thisMovie.getDirector());
                 MovieDetailActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
