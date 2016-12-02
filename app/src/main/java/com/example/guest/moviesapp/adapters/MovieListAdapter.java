@@ -18,6 +18,8 @@ import com.example.guest.moviesapp.UI.MainActivity;
 import com.example.guest.moviesapp.UI.MovieDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -78,9 +80,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
-            String clickedMovieId = mMovies.get(getLayoutPosition()).getMovieId();
-            intent.putExtra("movieId", clickedMovieId);
-            Log.d("movieId", clickedMovieId);
+            Movie clickedMovie = mMovies.get(getLayoutPosition());
+            intent.putExtra("movie", Parcels.wrap(clickedMovie));
             mContext.startActivity(intent);
         }
     }

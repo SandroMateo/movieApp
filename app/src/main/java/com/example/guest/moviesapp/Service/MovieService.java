@@ -40,6 +40,21 @@ public class MovieService {
         call.enqueue(callback);
     }
 
+    public static void findMovieCredits(String movieId, Callback callback) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .build();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL + movieId + Constants.CREDITS_QUERY_PARAMETERS).newBuilder();
+        urlBuilder.addQueryParameter(Constants.API_QUERY_PARAMETER, Constants.API_KEY);
+        String url = urlBuilder.build().toString();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
     public ArrayList<Movie> processNowPlayingResults(Response response) {
         ArrayList<Movie> movies = new ArrayList<>();
 
@@ -67,5 +82,30 @@ public class MovieService {
             e.printStackTrace();
         }
         return movies;
+    }
+
+    public void processMovieCredits(Movie movie, Response response) {
+        try {
+            String jsonData = response.body().string();
+            if(response.isSuccessful()) {
+                JSONObject creditsJSON = new JSONObject(jsonData);
+                JSONArray castJSON = creditsJSON.getJSONArray("cast");
+                JSONArray crewJSON = creditsJSON.getJSONArray("crew");
+                for(int i = 0; i < 5; i++) {
+                    movie.getMainActors().add(castJSON.getJSONObject(i).getString("name"));
+                }
+                for(int i = 0; i < crewJSON.length(); i++) {
+                    String job = crewJSON.getJSONObject(i).getString("job");
+                    if(job.equals("Director")) {
+                        movie.setDirector(crewJSON.getJSONObject(i).getString("name"));
+                    }
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
